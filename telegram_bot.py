@@ -14,7 +14,7 @@ from telegram.ext import (
 )
 
 # --- تنظیمات ---
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
+BOT_TOKEN = "8764134577:AAEPIJZgsRDlrbALWTf_pif7ny81pcwB5lc"
 CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
 ADMIN_ID = int(os.environ.get("ADMIN_ID", "0"))  # آیدی عددی تلگرام ادمین
 CARD_NUMBER = os.environ.get("CARD_NUMBER", "6037-XXXX-XXXX-XXXX")
