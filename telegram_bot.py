@@ -14,7 +14,7 @@ from telegram.ext import (
 )
 
 # --- تنظیمات ---
-BOT_TOKEN = "8764134577:AAEPIJZgsRDlrbALWTf_pif7ny81pcwB5lc"
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
 ADMIN_ID = int(os.environ.get("ADMIN_ID", "0"))  # آیدی عددی تلگرام ادمین
 CARD_NUMBER = os.environ.get("CARD_NUMBER", "6037-XXXX-XXXX-XXXX")
@@ -97,7 +97,12 @@ async def ask_claude(question: str) -> str:
             timeout=30
         )
         data = response.json()
-        return data["content"][0]["text"]
+        if "content" in data and len(data["content"]) > 0:
+            return data["content"][0]["text"]
+        elif "error" in data:
+            return f"خطا از سرور: {data['error']['message']}"
+        else:
+            return "متاسفم، مشکلی پیش اومد."
 
 # --- هندلرها ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
